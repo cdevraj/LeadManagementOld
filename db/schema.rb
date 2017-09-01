@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170901105535) do
+ActiveRecord::Schema.define(version: 20170901135924) do
+
+  create_table "email_notes", force: :cascade do |t|
+    t.integer "email_id"
+    t.text "notes"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email_id"], name: "index_email_notes_on_email_id"
+    t.index ["user_id"], name: "index_email_notes_on_user_id"
+  end
 
   create_table "emails", force: :cascade do |t|
     t.integer "sender_id"

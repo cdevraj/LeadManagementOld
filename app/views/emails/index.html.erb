@@ -12,18 +12,32 @@
     <u><%= email.reciever_email %></u>
     with subject 
     <b>
-    <%= email.subject %></b> belongs to Lead Generator
-    
-    <b><%= lead.lead_generator.name %></b> and 
-    <p>
-      content:- <%= email.content %> 
-    </p>
-    <span>
-    sent time <%= email.created_at %> - SMTP: <b><%= email.smtp %></b> 
-    </span>
-  </li>
-</ul>
+      <%= email.subject %></b> belongs to Lead Generator
+
+      <b><%= lead.lead_generator.name %></b> and 
+      <p>
+        content:- <%= email.content %> 
+      </p>
+      <span>
+        sent time <%= email.created_at %> - SMTP: <b><%= email.smtp %></b> 
+      </span>
+    </li>
+    <h4> email notes </h4>
+    <div class="email_notes" >
+      <% email.email_notes.each do |en| %>
+      <li> <%=en.notes%>, by - <cite><%=en.user.name%></cite></li>
+      <% end %>
+    </div>
+  </ul>
+  <%= form_for ([email, EmailNote.new]) do |f| %>
+  <p>
+    <%= f.hidden_field :email_id, value: email.id %>
+    <%= f.hidden_field :user_id, value: current_user.id %>
+    <%= f.label :notes, "Note" %><br/>
+    <%= f.text_area :notes %>
+  </p>
+  <p><%= f.submit "Add Note"%></p>
+  <% end %>
   <% end %>
 
-
-<%= link_to 'New Email', new_email_path %>
+  <%= link_to 'New Email', new_email_path %>

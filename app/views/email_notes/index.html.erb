@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Email Notes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Email</th>
+      <th>Notes</th>
+      <th>User</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @email_notes.each do |email_note| %>
+      <tr>
+        <td><%= email_note.email %></td>
+        <td><%= email_note.notes %></td>
+        <td><%= email_note.user %></td>
+        <td><%= link_to 'Show', email_note %></td>
+        <td><%= link_to 'Edit', edit_email_note_path(email_note) %></td>
+        <td><%= link_to 'Destroy', email_note, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Email Note', new_email_note_path %>
