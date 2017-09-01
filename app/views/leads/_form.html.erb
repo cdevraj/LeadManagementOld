@@ -1,0 +1,52 @@
+<div id="authform">
+	<%= form_for :lead, :url => '/leads', :html => { :role => 'form'} do |f| %>
+	<div class="form-group">
+		<%= f.label :first_name %>
+		<%= f.text_field :first_name, :autofocus => true, class: 'form-control' %>
+
+	</div>
+	<div class="form-group">
+		<%= f.label :last_name %>
+		<%= f.text_field :last_name, class: 'form-control' %>
+	</div>
+	<div class="form-group">
+		<%= f.label :email %>
+		<%= f.text_field :email,  class: 'form-control' %>
+	</div>
+	<div class="form-group">
+		<%= f.label :email2 %>
+		<%= f.text_field :email2,  class: 'form-control' %>
+	</div>
+	<div class="form-group">
+		<%= f.label :phone_number %>
+		<%= f.text_field :phone_number,  class: 'form-control' %>
+	</div>
+	<div class="form-group">
+		<%= f.label :phone_number2 %>
+		<%= f.text_field :phone_number2,  class: 'form-control' %>
+	</div>
+	<div class="form-group">
+		<%= f.label :category %>
+		<%= f.text_field :category,  class: 'form-control' %>
+	</div>
+	<div class="form-group">
+		<%= f.label :company_url %>
+		<%= f.text_field :company_url , class: 'form-control' %>
+	</div>
+	<div class="form-group">
+		<%= f.label :about_me %>
+		<%= f.text_area :about_me, class: 'form-control' %>
+	</div>
+	<div class="form-group">
+		<%= f.label :status %>
+		<%= f.text_area :status, class: 'form-control' %>
+	</div>
+	<div class="form-group">
+		<%= f.label :comment %>
+		<%= f.text_area :comment, class: 'form-control' %>	
+		</div>
+	<%= f.hidden_field :lead_id, value: current_user.id %>
+	  <%= f.submit 'Create Lead', :class => 'button right' %>
+	<% end %>
+
+</div>

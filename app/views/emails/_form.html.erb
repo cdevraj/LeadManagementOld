@@ -1,0 +1,54 @@
+<%= form_with(model: @email, local: true) do |form| %>
+  <% if email.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(email.errors.count, "error") %> prohibited this email from being saved:</h2>
+
+      <ul>
+      <% email.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.hidden_field :sender_id, id: :email_sender_id, value: current_user.id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :reciever_id %>
+    <%= form.select :reciever_id, grouped_options_for_select(@leads_email_map), {prompt: "Select users to_send emails"},
+{:multiple => true, class: "input-md"} %> 
+  </div>
+
+  <div class="field">
+    <%= form.label :subject %>
+    <%= form.text_field :subject, id: :email_subject %>
+  </div>
+
+  <div class="field">
+    <%= form.label :content %>
+    <%= form.text_area :content, id: :email_content %>
+  </div>
+
+  Or
+
+  <div class="field">
+    or  select a template
+    <button><a href="#">select a template</a></button>
+  </div>
+
+  <div class="field">
+    <%= form.label :smtp %>
+    <%= form.select(:smtp, options_for_select([['Gmail', 'Gmail'], ['SendGrid', 'SendGrid']]), {}, {class: "form-control", :style => "width:150px"}) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :delivery_time %>* to be in minutes
+    <%= form.text_field :to_be_sent_in, id: :to_be_sent_in %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

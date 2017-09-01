@@ -9,7 +9,13 @@
     <div class="form-group">
       <%= f.label :user_role %>
       <%= f.select(:type, options_for_select([['Manager', 'Users::Manager'], ['LeadGenerator', 'Users::LeadGenerator']]), {}, {class: "form-control"}) %>
+    </div>    
+
+    <div class="form-group" id="assign_manager">
+      <%= f.label :select_manager %>
+      <%= f.select(:parent_id, options_for_select(Users::Manager.all.collect{|d| [d.name, d.id]}), {}, {class: "form-control"}) %>
     </div>
+    
     <div class="form-group">
       <%= f.label :email %>
       <%= f.email_field :email, class: 'form-control' %>
@@ -25,3 +31,16 @@
      <%= f.submit 'Sign up', :class => 'button right' %>
   <% end %>
 </div>
+<script type="text/javascript">
+  $(document).ready(function() {
+  $('#assign_manager').hide();
+  $('#user_type').on("click", function(){
+    console.log("value", this.value);
+    if(this.value == 'Users::Manager'){
+      $('#assign_manager').hide();
+    }else{
+      $('#assign_manager').show();
+    }
+  })
+})
+</script>

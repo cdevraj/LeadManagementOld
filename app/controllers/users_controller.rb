@@ -12,4 +12,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def update_manager
+    @user = User.find(params['users_lead_generator'][:id])
+    @user.update_attributes(parent_id: params['users_lead_generator'][:parent_id])
+    redirect_to root_url, notice: 'Updated manager'
+  end
+
 end

@@ -1,0 +1,40 @@
+<div class="widget stacked widget-table action-table">
+
+  <div class="widget-header">
+    <i class="icon-th-list"></i>
+    <h3>Listing Lead Generators </h3>
+  </div> <!-- /widget-header -->
+
+  <div class="widget-content">
+
+    <table class="table table-striped table-bordered">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+
+          <th>Update Manager</th>
+          <th>Show Leads</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% current_user.lead_generators.each do |lead_generator| %>
+        <tr>
+          <td><%= lead_generator.name %></td>
+          <td><%= lead_generator.email %></td>
+          <td>
+           <%= form_for lead_generator, url: '/update_manager', method: 'put' do |f| %>
+           <%= f.hidden_field :id, value: lead_generator.id %>
+           <%= f.select :parent_id, options_for_select(Users::Manager.all.map {|a| [a.name, a.id] }, lead_generator.manager.id),{},{class: "form-control"}%>
+           <br>
+           <%= f.submit "Submit" %>
+           <% end %>
+         </td>
+         <td><%= link_to "Show leads", show_leads_url(lead_id: lead_generator.id) %></td>
+       </tr>
+       <% end %>
+     </tbody>
+   </table>	
+ </div>
+</div>

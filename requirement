@@ -1,0 +1,51 @@
+​User Type: LeadGenerator
+
+# Submit Lead  (first name, last name, email, email2, phone number, phone number2, category, company url, about_me, Status, comment)
+# He can see his leads 
+
+User Type: Manager
+
+# Manager can have many LeadGenerators
+# Manager can see leads of his LeadGenerators  
+# Manager can send email 
+# Manager can assign lead to other Manager
+
+# Manager can choose email template 
+# Manager can create email template 
+# Manager can send customize email 
+
+
+# Manager can choose any email to send
+# manager can set the timing of sending mail
+note: We need to send only text email
+# Manager can see all communication history of lead 
+# Manager can enter notes for lead
+
+
+first_name
+last_name
+email
+email2
+phone_number
+phone_number2
+category
+company_url
+about_me
+status
+comment
+
+User Type: Admin
+# Admin dashboard
+
+
+
+Note: We need to set multiple(atleast 5) cloud based SMTP mail server(sendgrid, postmark) with multiple emails
+
+
+
+DB
+User
+ LeadGenerator has many leads and belongs to Lead 
+ Manager
+
+ l.assign_attributes("first_name"=>'User', "last_name"=>'lastname', "email"=>'email1@testing.com', "email2"=>'email2@testing.com', "phone_number"=>'123456789', "phone_number2"=>'234567864', "category"=>'testinmg', "company_url"=>'ww.com', "about_me"=>"tset", "status"=>"sappod", "comment"=>"somded")

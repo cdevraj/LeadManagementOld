@@ -5,10 +5,10 @@
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
                 <a href="#">
-                    Start Bootstrap
+                    Lead Management
                 </a>
             </li>
-            <li>
+            <!-- <li>
                 <a href="#">Dashboard</a>
             </li>
             <li>
@@ -19,33 +19,45 @@
             </li>
             <li>
                 <a href="#">Events</a>
-            </li>
+            </li> -->
+            <% if current_user && current_user.is_manager? %>
+                <li>
+                    <a href="#">Lead Generators</a>
+                </li>
+            <% elsif current_user %>
+                <li>
+                    <a href="/leads?lead_id=<%=current_user.id%>">Leads</a>
+                </li>
+            <% end %>
             <li>
-                <a href="#">About</a>
+                <a href="#">Communication History</a>
             </li>
-            <li>
-                <a href="#">Services</a>
-            </li>
-            <li>
-                <a href="#">Contact</a>
-            </li>
+            <% if current_user && current_user.is_manager? %>
+                <li>
+                    <a href=<%=emails_url%>>Send Emails</a>
+                </li>
+             <% end %>   
         </ul>
     </div>
     <!-- /#sidebar-wrapper -->
 
     <!-- Page Content -->
-    <div id="page-content-wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1>Simple Sidebar</h1>
-                    <p>This template has a responsive menu toggling system. The menu will appear collapsed on smaller screens, and will appear non-collapsed on larger screens. When toggled using the button below, the menu will appear/disappear. On small screens, the page content will be pushed off canvas.</p>
-                    <p>Make sure to keep all page content within the <code>#page-content-wrapper</code>.</p>
-                    <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+    <% if current_user && current_user.is_manager? %>
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <%= render partial: '/users/manager_leads' %>
+                        <br><br>
+                        <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+      <% else %>
+      <a href="#menu-toggle" class="btn btn-default" id="menu-toggle">Toggle Menu</a>  
+     <% end %>
+            
     <!-- /#page-content-wrapper -->
 
 </div>

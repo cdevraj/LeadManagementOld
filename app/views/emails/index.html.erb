@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Emails sent History </h1>
+<% @emails.each do |email| %>
+<ul class="list-group">
+  <!-- [#<Email id: 16, sender_id: 6, reciever_id: 1, subject: "sdfds", content: "dsfdsfsfdsf", smtp: "Gmail", created_at: "2017-09-01 11:21:02", updated_at: "2017-09-01 11:21:02", lead_generator_id: 7>] -->
+  
+  <% lead = Lead.find_by_id(email.reciever_id) %>
+  <li class="list-group-item">Email sent to 
+    <b><%= lead.first_name + lead.last_name %> with </b>
+    reciever_email: as 
+    <u><%= email.reciever_email %></u>
+    with subject 
+    <b>
+    <%= email.subject %></b> belongs to Lead Generator
+    
+    <b><%= lead.lead_generator.name %></b> and 
+    <p>
+      content:- <%= email.content %> 
+    </p>
+    <span>
+    sent time <%= email.created_at %> - SMTP: <b><%= email.smtp %></b> 
+    </span>
+  </li>
+</ul>
+  <% end %>
+
+
+<%= link_to 'New Email', new_email_path %>
