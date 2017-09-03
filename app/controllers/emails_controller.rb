@@ -4,7 +4,7 @@ class EmailsController < ApplicationController
   # GET /emails
   # GET /emails.json
   def index
-    @emails = Email.all
+    @emails = Email.where(sender_id: current_user.id)
   end
 
   # GET /emails/1
