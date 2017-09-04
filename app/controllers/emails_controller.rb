@@ -30,7 +30,7 @@ class EmailsController < ApplicationController
   def create
     sending_emails = email_params['reciever_id'].tap { |hs| hs.delete('reciever_id') }
     # send_mails here 
-    sending_params = {subject: email_params['subject'], body: email_params['body']}
+    sending_params = {subject: email_params['subject'], body: email_params['body'], smtp: email_params['smtp']}
     unless email_params['to_be_sent_in'].blank?
       UserMailer.send_email(current_user, sending_emails.reject(&:blank?), sending_params).deliver_later(wait_untill: email_params['to_be_sent_in'].to_i.minutes)
     else
